@@ -7,6 +7,8 @@ I assume you have Ubuntu LTS (e.g. 18.04) installed on all machines (rke nodes) 
 ```
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/rancher-rke-key.pem -C <your email>
 ## you have to add the rancher-rke-key.pem.pub to .ssh/authorized_keys on rke hosts, or use ssh-copy-id!!!
+## Please make sure the user (in our case ubuntu) or whatever user has been added to the docker group
+sudo usermod -aG docker <user name>
 git clone https://github.com/arashkaffamanesh/docker-rke
 docker build -t kubernautslabs/docker-rke .
 docker run -it --rm -v "$PWD:/tmp" -v "$HOME/.ssh/:/root/.ssh" kubernautslabs/docker-rke
