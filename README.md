@@ -11,7 +11,9 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/rancher-rke-key.pem -C <your email>
 sudo usermod -aG docker <user name>
 git clone https://github.com/arashkaffamanesh/docker-rke
 docker build -t kubernautslabs/docker-rke .
-docker run -it --rm -v "$PWD:/tmp" -v "$HOME/.ssh/:/root/.ssh" kubernautslabs/docker-rke
+docker run -it -d -v "$PWD:/tmp" -v "$HOME/.ssh/:/root/.ssh" kubernautslabs/docker-rke
+docker ps
+docker exec <CONTAINER ID> bash
 ## You should jump into the container
 root@xyz:~# cd /tmp
 ## Provide the rke hosts entries in /etc/hosts in the container
@@ -26,5 +28,20 @@ root@xyz:~# kubectl get all -A
 ```
 
 # Deploy Rancher with HELM
+
+If using Private CA
+
+```
+kubectl create namespace cattle-system
+
+kubectl -n cattle-system create secret tls tls-rancher-ingress \
+  --cert=tls.crt \
+  --key=tls.key
+
+helm install rancher rancher-latest/rancher \
+  --namespace cattle-system \
+  --set hostname=rancher.my.org \
+  --set ingress.tls.source=secret \
+  --set privateCA=true
 
 

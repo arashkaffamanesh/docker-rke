@@ -13,7 +13,7 @@ mkcert '*.rancher.svc'
 # on MacOS
 # cp $HOME/Library/Application\ Support/mkcert/rootCA.pem cacerts.pem
 # on Ubuntu Linux
-cp .local/share/mkcert/rootCA.pem cacerts.pem
+cp ~/.local/share/mkcert/rootCA.pem cacerts.pem
 cp _wildcard.rancher.svc.pem cert.pem
 cp _wildcard.rancher.svc-key.pem key.pem
 # in /etc/hosts set
