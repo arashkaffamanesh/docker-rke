@@ -11,7 +11,7 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/rancher-rke-key.pem -C <your email>
 sudo usermod -aG docker <user name>
 git clone https://github.com/arashkaffamanesh/docker-rke
 docker build -t kubernautslabs/docker-rke .
-docker run -it -d -v "$PWD:/tmp" -v "$HOME/.ssh/:/root/.ssh" kubernautslabs/docker-rke
+docker run --name docker-rke -it -d -v "$PWD:/tmp" -v "$HOME/.ssh/:/root/.ssh" kubernautslabs/docker-rke
 docker ps
 docker exec <CONTAINER ID> bash
 ## You should jump into the container
