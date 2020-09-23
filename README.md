@@ -13,7 +13,7 @@ git clone https://github.com/arashkaffamanesh/docker-rke
 docker build -t kubernautslabs/docker-rke .
 docker run --name docker-rke -it -d -v "$PWD:/tmp" -v "$HOME/.ssh/:/root/.ssh" kubernautslabs/docker-rke
 docker ps
-docker exec <CONTAINER ID> bash
+docker exec -it docker-rke bash
 ## You should jump into the container
 root@xyz:~# cd /tmp
 ## Provide the rke hosts entries in /etc/hosts in the container
