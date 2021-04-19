@@ -88,6 +88,8 @@ RUN git clone https://github.com/ahmetb/kubectx /opt/kubectx \
 
 COPY .bashrc /root
 
+WORKDIR /tmp
+
 RUN exec bash
 
 ENTRYPOINT ["/bin/bash"]
