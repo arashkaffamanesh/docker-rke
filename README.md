@@ -9,22 +9,30 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/rancher-rke-key.pem -C <your email>
 ## you have to add the rancher-rke-key.pem.pub to .ssh/authorized_keys on rke hosts, or use ssh-copy-id!!!
 ## Please make sure the user (in our case ubuntu) or whatever user has been added to the docker group
 sudo usermod -aG docker <user name>
-git clone https://github.com/arashkaffamanesh/docker-rke
+git clone https://github.com/arashkaffamanesh/docker-rke && cd docker-rke
+
+# optional step
 docker build -t kubernautslabs/docker-rke .
+
 docker run --name docker-rke -it -d -v "$PWD:/tmp" -v "$HOME/.ssh/:/root/.ssh" kubernautslabs/docker-rke
-docker ps
+
+# optional step
+docker ps 
+
+# exec the container
 docker exec -it docker-rke bash
-## You should jump into the container
-root@xyz:~# cd /tmp
-## Provide the rke hosts entries in /etc/hosts in the container
-root@xyz:~# vi /etc/hosts
-192.168.64.14 rke1
+
+## the rke config expects three dns host entries
+echo '192.168.64.14 rke1
 192.168.64.15 rke2
-192.168.64.17 rke3
-root@xyz:~# rke up
+192.168.64.17 rke3' >> /etc/hosts
+
+# start the rke three node deployment
+rke up --config ./cluster-extended.yml
+
 ## If the deployment goes well, please try
-root@xyz:~# export KUBECONFIG=kube_config_cluster.yml
-root@xyz:~# kubectl get all -A
+export KUBECONFIG=kube_config_cluster.yml
+kubectl get nodes
 ```
 
 # Deploy Rancher with HELM
