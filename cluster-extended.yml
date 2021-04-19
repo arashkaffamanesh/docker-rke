@@ -8,10 +8,10 @@ nodes:
   - worker
   - etcd
   hostname_override: ""
-  user: ubuntu
+  user: rke
   docker_socket: /var/run/docker.sock
   ssh_key: ""
-  ssh_key_path: ~/.ssh/rancher-rke-key.pem
+  ssh_key_path: ~/.ssh/id_rsa
   ssh_cert: ""
   ssh_cert_path: ""
   labels: {}
@@ -23,10 +23,10 @@ nodes:
   - worker
   - etcd
   hostname_override: ""
-  user: ubuntu
+  user: rke
   docker_socket: /var/run/docker.sock
   ssh_key: ""
-  ssh_key_path: ~/.ssh/rancher-rke-key.pem
+  ssh_key_path: ~/.ssh/id_rsa
   ssh_cert: ""
   ssh_cert_path: ""
   labels: {}
@@ -38,10 +38,10 @@ nodes:
   - worker
   - etcd
   hostname_override: ""
-  user: ubuntu
+  user: rke
   docker_socket: /var/run/docker.sock
   ssh_key: ""
-  ssh_key_path: ~/.ssh/rancher-rke-key.pem
+  ssh_key_path: ~/.ssh/id_rsa
   ssh_cert: ""
   ssh_cert_path: ""
   labels: {}
